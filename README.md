@@ -110,42 +110,68 @@ Quantity: 45
 This program provides a basic inventory management system that can be expanded further based on specific needs. It supports essential operations such as adding, updating, deleting, and searching for products. Additionally, it supports customization of product types, units, and stock thresholds.
 #here is the code
 ```mermaid
+
 graph TD
-    Start[Start] --> A[Main Menu]
-    A --> B1[Add Product]
+    A[Main Menu] --> B1[Add Product]
     A --> B2[Update Product]
     A --> B3[Delete Product]
     A --> B4[Display Products]
     A --> B5[Search Product by ID]
     A --> B6[Exit]
+    
+    B1 -->|Product ID: Assigned| C1[Enter Product Name]
+    C1 --> C2[Enter Product Price]
+    C2 --> C3[Enter Product Unit]
+    C3 --> C4[Enter Product Type]
+    C4 --> C5[New Type?]
+    C5 -->|Yes| C6[Create New Type]
+    C5 -->|No| C7[Select Existing Type]
+    C6 --> C7
+    C7 --> C8[Enter Product Quantity]
+    C8 --> C9{Add Another Product?}
+    C9 -->|Yes| B1
+    C9 -->|No| D[Display Products]
+    
+    B2 -->|Enter Product ID| E1[Check Valid ID]
+    E1 -->|Valid ID| E2[Enter New Name]
+    E2 --> E3[Enter New Price]
+    E3 --> E4[Enter New Quantity]
+    E4 --> E5{Update Another Product?}
+    E5 -->|Yes| B2
+    E5 -->|No| D[Display Products]
+    E1 -->|Invalid ID| E6{Update Another Product?}
+    E6 -->|Yes| B2
+    E6 -->|No| D[Display Products]
+    
+    B3 -->|Enter Product ID| F1[Check Valid ID]
+    F1 -->|Valid ID| F2[Delete Product]
+    F2 --> F3{Delete Another Product?}
+    F3 -->|Yes| B3
+    F3 -->|No| D[Display Products]
+    F1 -->|Invalid ID| F4{Delete Another Product?}
+    F4 -->|Yes| B3
+    F4 -->|No| D[Display Products]
+    
+    B4 -->|Display All Products| G[Show Products]
+    
+    B5 -->|Enter Product ID| H1[Check Valid ID]
+    H1 -->|Valid ID| H2[Show Product Details]
+    H2 --> H3{Search Another Product?}
+    H3 -->|Yes| B5
+    H3 -->|No| I[Perform Another Task?]
+    H1 -->|Invalid ID| H4{Search Another Product?}
+    H4 -->|Yes| B5
+    H4 -->|No| I[Perform Another Task?]
+    
+    B6 --> J[Save Products To File]
+    J --> K[Exiting Program]
+    
+    I -->|Yes| A
+    I -->|No| K[Exiting Program]
 
-    B1 --> C1[Enter Details]
-    C1 --> C2[Create/Select Type]
-    C2 --> C3[Add More?]
-    C3 -->|Yes| B1
-    C3 -->|No| End
+   
 
-    B2 --> D1[Enter ID]
-    D1 --> D2[Enter New Details]
-    D2 --> D3[Update More?]
-    D3 -->|Yes| B2
-    D3 -->|No| End
 
-    B3 --> E1[Enter ID]
-    E1 --> E2[Confirm Delete]
-    E2 --> E3[Delete More?]
-    E3 -->|Yes| B3
-    E3 -->|No| End
-
-    B4 --> G[Show Products] --> End
-
-    B5 --> F1[Enter ID]
-    F1 --> F2[Show Details]
-    F2 --> F3[Search More?]
-    F3 -->|Yes| B5
-    F3 -->|No| End
-
-    B6 --> G1[Save & Exit] --> End
 
 
 
