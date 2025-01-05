@@ -1,4 +1,4 @@
-# Inventory Management System
+ # Inventory Management System
 
 This program is a simple inventory management system that allows users to add, update, delete, search, and display products in an inventory. The data is stored in a file (`products.txt`) and can be loaded and saved between program runs. The program allows for customization of product types, units, and stock thresholds.
 
