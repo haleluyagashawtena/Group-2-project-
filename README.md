@@ -1,147 +1,155 @@
 # Inventory Management System
 
-This is a simple inventory management system written in C++. It allows the user to add, update, delete, display, and search for products in an inventory. The inventory is limited to a maximum of 1000 products.
+This program is a simple inventory management system that allows users to add, update, delete, search, and display products in an inventory. The data is stored in a file (products.txt) and can be loaded and saved between program runs. The program allows for customization of product types, units, and stock thresholds.
 
 ## Features
+1. Add Product: Users can add a new product to the inventory, specifying its name, price, unit, type, and quantity.
+2. Update Product: Users can update an existing product's details such as name, price, and quantity.
+3. Delete Product: Users can delete a product from the inventory by its ID.
+4. Display Products: Users can view all products in the inventory along with their details (ID, name, price, unit, type, and quantity). Low-stock products are flagged with a warning.
+5. Search Product by ID: Users can search for a product by its unique ID and view its details.
+6. Custom Types and Units: Users can create their own product types and units that are not predefined in the system.
+7. Threshold Warning: Products with quantities below their predefined threshold will trigger a low-stock warning.
 
-- **Add Product**: Add a new product to the inventory.
-- **Update Product**: Update the details of an existing product.
-- **Delete Product**: Delete a product from the inventory using its ID.
-- **Display Products**: Display all products in the inventory.
-- **Search Product by ID**: Search for a product in the inventory using its ID.
+## How It Works
+- Products are stored in arrays with a limit of MAX_ITEMS = 100 items.
+- Each product has the following attributes:
+  - Name: The name of the product.
+  - Price: The price of the product.
+  - Unit: The unit of measurement (e.g., Bottle, Kilogram, Liter).
+  - Type: The category of the product (e.g., Dairy, Fruit, Grains).
+  - Quantity: The available quantity of the product.
+- Data is stored in the file products.txt, which is loaded at the start of the program and saved at the end.
 
-## Code Overview
+## Predefined Product Types
+The program comes with a set of predefined product types:
+- Dairy (D)
+- Vegetable (V)
+- Fruit (F)
+- Grains (G)
+- Beverages (B)
+- Oils (O)
+- Snacks (S)
+- Condiments (C)
+- Liquids (L)
+- Paper Products (P)
 
-The main components of the code include:
+Custom product types can also be added by the user with a corresponding letter representation.
 
-- **Product Structure**: Defines the structure of a product, including its ID, name, price, quantity, and type.
-- **Global Variables**: 
-  - `products[MAX_PRODUCTS]`: An array to store up to `MAX_PRODUCTS` number of products.
-  - `productCount`: Tracks the number of products currently in the inventory.
-- **Functions**: 
-  - `addProduct()`: Adds a new product to the inventory.
-  - `updateProduct()`: Updates the details of an existing product.
-  - `deleteProduct()`: Deletes a product from the inventory.
-  - `displayProducts()`: Displays all products in the inventory.
-  - `searchProductByID()`: Searches for a product by its ID.
+## Data Storage
+The inventory data is stored in the products.txt file in the following format:
+<item_count>
+<name>,<price>,<unit>,<type>,<quantity>
 
-## How to Use
+- The first line contains the number of items in the inventory.
+- Each subsequent line contains the details of a product, separated by commas.
 
-1. **Compile the Program**: Use a C++ compiler to compile the program.
-   ```bash
-   g++ -o inventory_management main.cpp
-   ```
-2. **Run the Program**: Execute the compiled program.
-   ```bash
-   ./inventory_management
-   ```
+## Main Menu Options
+When the program is running, the user is presented with a main menu with the following options:
 
-3. **Menu Options**: The program displays a menu with the following options:
-   1. Add Product
-   2. Update Product
-   3. Delete Product
-   4. Display Products
-   5. Search Product by ID
-   6. Exit
-
-4. **Choose an Option**: Enter the number corresponding to the desired action.
+1. Add Product: Allows the user to add a new product.
+2. Update Product: Allows the user to update an existing product by entering its ID.
+3. Delete Product: Allows the user to delete a product by entering its ID.
+4. Display Products: Shows all products in the inventory.
+5. Search Product by ID: Allows the user to search for a product by its ID and view its details.
+6. Exit: Saves the data to products.txt and exits the program.
 
 ## Example Usage
-
-Here's an example of how the program works:
-
-```
-Menu:
-1. Add Product
-2. Update Product
-3. Delete Product
-4. Display Products
-5. Search Product by ID
-6. Exit
-Enter choice: 1
-Enter product ID: 101
-Enter product name: Apple
-Enter product price: 0.99
+### Adding a Product:
+Enter product name: Milk
+Enter product price: 2.5
+Enter product unit (e.g., Bottle, Kilogram, Liter, Pack): Liter
+Enter the product type (e.g., Dairy, Vegetable): Dairy
 Enter product quantity: 50
-Enter product type: Fruits
-Product added successfully!
-```
+Product added successfully.
 
-## Limitations
+### Updating a Product:
+Enter product ID to update: 1
+Updating product Milk:
+Enter new name: Soy Milk
+Enter new price: 3.0
+Enter new quantity: 45
+Product updated successfully.
 
-- The program is limited to a maximum of 1000 products.
-- The user must enter valid data types for each input (e.g., integers for IDs and quantities, floats for prices).
+### Deleting a Product:
+Enter product ID to delete: 2
+Product deleted successfully.
 
-## Future Improvements
+### Displaying Products:
+| Product ID | Name       | Price | Unit   | Type | Quantity |
+|------------|------------|-------|--------|------|----------|
+| 1          | Soy Milk   | 3.0   | Liter  | D    | 45       |
+| 2          | Apple      | 1.0   | Kilogram| F    | 30       |
 
-- Implement file I/O to save and load inventory data from a file.
-- Add input validation to handle incorrect data types.
-- Enhance the user interface for a better user experience.
+### Searching for a Product:
+Enter product ID to search: 1
+Product ID: 1
+Name: Soy Milk
+Price: 3.0
+Unit: Liter
+Type: Dairy
+Quantity: 45
 
-## License
+## File Management
+- Loading: The program automatically loads data from products.txt when it starts.
+- Saving: Any changes made during the session are saved to products.txt when the program exits.
 
-This project is open-source and available under the [MIT License](https://opensource.org/licenses/MIT).
+
+## Conclusion
+This program provides a basic inventory management system that can be expanded further based on specific needs. It supports essential operations such as adding, updating, deleting, and searching for products. Additionally, it supports customization of product types, units, and stock thresholds.
 
 #here is the code
 ```mermaid
 
 graph TD
-    A[Main Menu] --> B1[Add Product]
-    A --> B2[Update Product]
-    A --> B3[Delete Product]
-    A --> B4[Display Products]
-    A --> B5[Search Product by ID]
-    A --> B6[Exit]
+    A[Start] --> B[Load Products from File]
+    B --> C{Menu}
+    C -->|Add Product| D[Add Product Function]
+    C -->|Update Product| E[Update Product Function]
+    C -->|Delete Product| F[Delete Product Function]
+    C -->|Display Products| G[Display Products Function]
+    C -->|Search Product by ID| H[Search Product by ID Function]
+    C -->|Exit| I[Save Products to File and Exit]
     
-    B1 -->|Product ID: Assigned| C1[Enter Product Name]
-    C1 --> C2[Enter Product Price]
-    C2 --> C3[Enter Product Unit]
-    C3 --> C4[Enter Product Type]
-    C4 --> C5[New Type?]
-    C5 -->|Yes| C6[Create New Type]
-    C5 -->|No| C7[Select Existing Type]
-    C6 --> C7
-    C7 --> C8[Enter Product Quantity]
-    C8 --> C9{Add Another Product?}
-    C9 -->|Yes| B1
-    C9 -->|No| D[Display Products]
-    
-    B2 -->|Enter Product ID| E1[Check Valid ID]
-    E1 -->|Valid ID| E2[Enter New Name]
-    E2 --> E3[Enter New Price]
-    E3 --> E4[Enter New Quantity]
-    E4 --> E5{Update Another Product?}
-    E5 -->|Yes| B2
-    E5 -->|No| D[Display Products]
-    E1 -->|Invalid ID| E6{Update Another Product?}
-    E6 -->|Yes| B2
-    E6 -->|No| D[Display Products]
-    
-    B3 -->|Enter Product ID| F1[Check Valid ID]
-    F1 -->|Valid ID| F2[Delete Product]
-    F2 --> F3{Delete Another Product?}
-    F3 -->|Yes| B3
-    F3 -->|No| D[Display Products]
-    F1 -->|Invalid ID| F4{Delete Another Product?}
-    F4 -->|Yes| B3
-    F4 -->|No| D[Display Products]
-    
-    B4 -->|Display All Products| G[Show Products]
-    
-    B5 -->|Enter Product ID| H1[Check Valid ID]
-    H1 -->|Valid ID| H2[Show Product Details]
-    H2 --> H3{Search Another Product?}
-    H3 -->|Yes| B5
-    H3 -->|No| I[Perform Another Task?]
-    H1 -->|Invalid ID| H4{Search Another Product?}
-    H4 -->|Yes| B5
-    H4 -->|No| I[Perform Another Task?]
-    
-    B6 --> J[Save Products To File]
-    J --> K[Exiting Program]
-    
-    I -->|Yes| A
-    I -->|No| K[Exiting Program]
+    D --> J[Input Product Name]
+    J --> K[Input Product Price]
+    K --> L[Input Unit Type]
+    L --> M[Check Custom Unit]
+    M --> N[Input Product Type]
+    N --> O[Add Product to List]
+    O --> P[Ask if Repeat Task]
+    P -->|Yes| D
+    P -->|No| C
+
+    E --> Q[Input Product ID to Update]
+    Q --> R[Check Product ID Validity]
+    R -->|Valid| S[Update Product Info]
+    S --> T[Ask if Repeat Task]
+    T -->|Yes| E
+    T -->|No| C
+
+    F --> U[Input Product ID to Delete]
+    U --> V[Check Product ID Validity]
+    V -->|Valid| W[Delete Product]
+    W --> X[Ask if Repeat Task]
+    X -->|Yes| F
+    X -->|No| C
+
+    G --> Y[Display Product List]
+    Y --> Z[Check Quantity Against Threshold]
+    Z --> AA[Warn if Low Stock]
+    AA --> AB[Return to Menu]
+
+    H --> AC[Input Product ID to Search]
+    AC --> AD[Check Product ID Validity]
+    AD -->|Valid| AE[Display Product Info]
+    AE --> AF[Ask if Repeat Task]
+    AF -->|Yes| H
+    AF -->|No| C
+
+    I --> AG[Exit Program]
+    AG --> A
+
 
    
 
