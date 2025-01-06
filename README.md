@@ -102,7 +102,7 @@ This program provides a basic inventory management system that can be expanded f
 ```mermaid
 
 graph TD
-    A[Start] --> B[Load Products from File]
+    A((Start)) --> B[Load Products from File]
     B --> C{Menu}
     C -->|Add Product| D[Add Product Function]
     C -->|Update Product| E[Update Product Function]
@@ -114,41 +114,54 @@ graph TD
     D --> J[Input Product Name]
     J --> K[Input Product Price]
     K --> L[Input Unit Type]
-    L --> M[Check Custom Unit]
-    M --> N[Input Product Type]
+    L --> M{Check Custom Unit}
+    M -->|Yes| N[Input Product Type]
+    M -->|No| N
     N --> O[Add Product to List]
-    O --> P[Ask if Repeat Task]
+    O --> P{Ask if Repeat Task}
     P -->|Yes| D
-    P -->|No| C
+    P -->|No| Q1{Ask if Perform Another Task}
+    Q1 -->|Yes| C
+    Q1 -->|No| R[Display Products Before Exit]
+    R --> S[Save Products to File and Exit]
+    S --> T((End))
 
     E --> Q[Input Product ID to Update]
-    Q --> R[Check Product ID Validity]
-    R -->|Valid| S[Update Product Info]
-    S --> T[Ask if Repeat Task]
-    T -->|Yes| E
-    T -->|No| C
+    Q --> R1{Check Product ID Validity}
+    R1 -->|Valid| S1[Update Product Info]
+    R1 -->|Invalid| Q2{Ask if Perform Another Task}
+    S1 --> T1{Ask if Repeat Task}
+    T1 -->|Yes| E
+    T1 -->|No| Q2
+    Q2 -->|Yes| C
+    Q2 -->|No| R
 
     F --> U[Input Product ID to Delete]
-    U --> V[Check Product ID Validity]
+    U --> V{Check Product ID Validity}
     V -->|Valid| W[Delete Product]
-    W --> X[Ask if Repeat Task]
+    V -->|Invalid| Q3{Ask if Perform Another Task}
+    W --> X{Ask if Repeat Task}
     X -->|Yes| F
-    X -->|No| C
+    X -->|No| Q3
+    Q3 -->|Yes| C
+    Q3 -->|No| R
 
     G --> Y[Display Product List]
-    Y --> Z[Check Quantity Against Threshold]
-    Z --> AA[Warn if Low Stock]
-    AA --> AB[Return to Menu]
+    Y --> Z{Check Quantity Against Threshold}
+    Z -->|Below Threshold| AA[Warn if Low Stock]
+    Z -->|Above Threshold| AB[Return to Menu]
+    AA --> AB
+    AB --> C
 
     H --> AC[Input Product ID to Search]
-    AC --> AD[Check Product ID Validity]
+    AC --> AD{Check Product ID Validity}
     AD -->|Valid| AE[Display Product Info]
-    AE --> AF[Ask if Repeat Task]
+    AD -->|Invalid| Q4{Ask if Perform Another Task}
+    AE --> AF{Ask if Repeat Task}
     AF -->|Yes| H
-    AF -->|No| C
-
-    I --> AG[Exit Program]
-    AG --> A
+    AF -->|No| Q4
+    Q4 -->|Yes| C
+    Q4 -->|No| R
 
 
    
